@@ -77,6 +77,27 @@ class QuizGame:
             print(f"[{i}] {quiz.question}")
         print("-"*40)
 
+    def quiz_play(self):
+        correct_count = 0
+        for i, quiz in enumerate(self.quizzes, start=1):
+            print(f"[{i}] {quiz.question}")
+            for n, option in enumerate(quiz.options, start=1):
+                print(f"[{n}] {option}")
+            
+            while True:
+                user_answer = input("정답 입력 1-4 : ")
+
+                if user_answer.isdigit() and 1 <= int(user_answer) <= 4:
+                    user_answer = int(user_answer)
+                    break
+                else:
+                    print("잘못된 입력입니다. 1부터 4사이의 숫자를 입력하세요.")
+            if user_answer == quiz.answer_idx:
+                correct_count += 1
+            else:
+                print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
+                         
+
     def run(self):
         try:
             while True:
@@ -91,7 +112,6 @@ class QuizGame:
                     #self.add_quiz() / 퀴즈 추가
                     pass
                 elif choice == "3":
-                    #self.list_quiz() / 퀴즈 목록
                     self.list_quiz()
 
                 elif  choice == "4":
