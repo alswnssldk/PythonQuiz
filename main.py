@@ -54,12 +54,23 @@ class QuizGame:
         except Exception as e:
             print(f"save error: {e}")
 
+
+    def Display_menu(self):
+        print("\n" + "="*40)
+        print("    🎯 나만의 퀴즈 게임 🎯\n")
+        print("\n"+"="*40)
+        print("\n1. 퀴즈 풀기")
+        print("\n2. 퀴즈 추가")
+        print("\n3. 퀴즈 목록")
+        print("\n4. 점수 확인")
+        print("\n5. 종료")
+        
+
+
 # 코드 동작 테스트
 if __name__ == "__main__":
     game = QuizGame()
-    print(f"현재 로드된 퀴즈 수: {len(game.quizzes)}개")
-    for idx, q in enumerate(game.quizzes, 1):
-        print(f"{idx}. {q.question}")    
+    game.run()
 
 # Quiz
 # - Quiz 객체
