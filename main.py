@@ -57,35 +57,49 @@ class QuizGame:
 
     def Display_menu(self):
         print("\n" + "="*40)
-        print("    🎯 나만의 퀴즈 게임 🎯\n")
-        print("\n"+"="*40)
+        print("    🎯 나만의 퀴즈 게임 🎯")
+        print("="*40)
         print("\n1. 퀴즈 풀기")
         print("\n2. 퀴즈 추가")
         print("\n3. 퀴즈 목록")
         print("\n4. 점수 확인")
         print("\n5. 종료")
 
+    def list_quiz(self):
+        print("\n등록된 퀴즈 목록 (총 {}개)".format(len(self.quizzes)))
+        print("\n"+"-"*40)
+
+        if len(self.quizzes) == 0:
+            print("등록된 퀴즈가 없습니다. 퀴즈를 추가해주세요.")
+            pritn("\n"+ "-"*40)
+            return
+        for i, quiz in enumerate(self.quizzes, start=1):
+            print(f"[{i}] {quiz.question}")
+        print("-"*40)
+
     def run(self):
         try:
             while True:
                 self.Display_menu()
-                choice = input("선택: ").strip()
+                choice = input("\n선택: ").strip()
 
                 if choice == "1":
-                    #self.play_quiz()
+                    #self.play_quiz() / 퀴즈 풀기
+                    
                     pass
                 elif choice == "2":
-                    #self.add_quiz()
+                    #self.add_quiz() / 퀴즈 추가
                     pass
                 elif choice == "3":
-                    #self.list_quiz()
-                    pass
+                    #self.list_quiz() / 퀴즈 목록
+                    self.list_quiz()
+
                 elif  choice == "4":
-                    #self.max_score()
+                    #self.max_score() / 점수 확인
                     pass
                 elif choice == "5":
                     print("프로그램을 종료합니다. 안녕히 가세요!")
-                    #self.save_data()
+                    #self.save_data() / 종료
                     break
                 else:
                     print("잘못된 입력입니다. 1-5 사이의 숫자를 입력해주세요")    
