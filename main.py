@@ -64,7 +64,40 @@ class QuizGame:
         print("\n3. 퀴즈 목록")
         print("\n4. 점수 확인")
         print("\n5. 종료")
-        
+
+    def run(self):
+        try:
+            while True:
+                self.Display_menu()
+                choice = input("선택: ").strip()
+
+                if choice == "1":
+                    #self.play_quiz()
+                    pass
+                elif choice == "2":
+                    #self.add_quiz()
+                    pass
+                elif choice == "3":
+                    #self.list_quiz()
+                    pass
+                elif  choice == "4":
+                    #self.max_score()
+                    pass
+                elif choice == "5":
+                    print("프로그램을 종료합니다. 안녕히 가세요!")
+                    #self.save_data()
+                    break
+                else:
+                    print("잘못된 입력입니다. 1-5 사이의 숫자를 입력해주세요")    
+
+        except KeyboardInterrupt:
+            print("\n\n Ctrl + C 프로그램을 종료합니다")
+            #self.save_data()
+            pass
+        except EOFError:
+            print("\n\n 에러로 입력이 종료 되었습니다")
+            #self.save_data()
+            pass
 
 
 # 코드 동작 테스트
