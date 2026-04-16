@@ -17,39 +17,47 @@ class Quiz:
     def from_dict(cls, data):
         return cls(data['question'], data["options"], data["answer_idx"])
 
-def create_defult_quizzes():
+def create_default_quizzes():
     return [
-        Quiz("~~~~",["-","-","-"], 2),
-        Quiz("~~~~",["-","-","-"], 2),
-        Quiz("~~~~",["-","-","-"], 2),
-        Quiz("~~~~",["-","-","-"], 2),
-        Quiz("~~~~",["-","-","-"], 2)
+        Quiz("~~~~",["-","-","-","-"], 2),
+        Quiz("~~~~",["-","-","-","-"], 2),
+        Quiz("~~~~",["-","-","-","-"], 2),
+        Quiz("~~~~",["-","-","-","-"], 2),
+        Quiz("~~~~",["-","-","-","-"], 2)
     ]
 
 class QuizGame:
     def __init__(self, file_path="state.json"):
         self.file_path = file_path
-        self.quizzes = self.load_state()
+        self.quizzes, self.best_score = self.load_state()
 
     def load_state(self):
         try:
             with open(self.file_path, "r", encoding="utf-8") as f:
-                data_list = json.load(f)
-                return [Quiz.from_dict(d) for d in data_list]
+                data = json.load(f)
+                loaded_quizzes = [Quiz.from_dict(d) for d in data["quizzes"]]
+                loaded_best_score = data["best_score"]
 
+                return loaded_quizzes, loaded_best_score
+            
         except (FileNotFoundError, json.JSONDecodeError):
             #파일 없음 / JSON오류
-            default_quizzes = create_defult_quizzes()
-            self.save_state(default_quizzes)
-            return default_quizzes
+            default_quizzes = create_default_quizzes()
+            self.quizzes = default_quizzes
+            self.best_score = 0
+
+            self.save_state()
+            return default_quizzes, 0
 
 
     def save_state(self, quizzes=None):
-        target_data = quizzes if quizzes is not None else self.quizzes
         try:
             with open(self.file_path, "w", encoding="utf-8") as f:
                 #Quiz객체를 -> dict로 변경
-                json_data = [q.to_dict() for q in target_data]         
+                json_data = {
+                    "quizzes": [q.to_dict() for q in self.quizzes], 
+                    "best_score": self.best_score         
+                }
                 json.dump(json_data, f, ensure_ascii=False, indent=4)
         except Exception as e:
             print(f"save error: {e}")
@@ -71,16 +79,16 @@ class QuizGame:
 
         if len(self.quizzes) == 0:
             print("등록된 퀴즈가 없습니다. 퀴즈를 추가해주세요.")
-            pritn("\n"+ "-"*40)
+            print("\n"+ "-"*40)
             return
         for i, quiz in enumerate(self.quizzes, start=1):
             print(f"[{i}] {quiz.question}")
         print("-"*40)
 
-    def quiz_play(self):
+    def play_quiz(self):
         correct_count = 0
         for i, quiz in enumerate(self.quizzes, start=1):
-            print(f"[{i}] {quiz.question}")
+            print(f"\n[{i}번 문제] {quiz.question}\n")
             for n, option in enumerate(quiz.options, start=1):
                 print(f"[{n}] {option}")
             
@@ -93,10 +101,11 @@ class QuizGame:
                 else:
                     print("잘못된 입력입니다. 1부터 4사이의 숫자를 입력하세요.")
             if user_answer == quiz.answer_idx:
+                print("정답입니다!")
                 correct_count += 1
             else:
                 print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
-                         
+                                 
 
     def run(self):
         try:
@@ -105,7 +114,7 @@ class QuizGame:
                 choice = input("\n선택: ").strip()
 
                 if choice == "1":
-                    #self.play_quiz() / 퀴즈 풀기
+                    self.play_quiz()
                     
                     pass
                 elif choice == "2":
@@ -119,7 +128,7 @@ class QuizGame:
                     pass
                 elif choice == "5":
                     print("프로그램을 종료합니다. 안녕히 가세요!")
-                    #self.save_data() / 종료
+                    self.save_state()
                     break
                 else:
                     print("잘못된 입력입니다. 1-5 사이의 숫자를 입력해주세요")    
