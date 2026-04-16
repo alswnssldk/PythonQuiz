@@ -105,7 +105,28 @@ class QuizGame:
                 correct_count += 1
             else:
                 print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
-                                 
+    
+    def add_quiz(self):
+        i = 0
+        new_quiz_options = []
+        new_quiz_question = input("문제를 입력해주세요 : ")
+    
+        for i in range(4):
+            new_quiz_options.append(input(f"\n[{i+1}] 번째 보기를 입력해주세요 : "))
+        
+        while True:
+            new_quiz_answer_idx = input("\n해당 문제에 정답을 알려주세요(1 ~ 4) : ")
+            if new_quiz_answer_idx.isdigit() and 1 <= int(new_quiz_answer_idx) <= 4:
+                answer_idx = int(new_quiz_answer_idx)
+                new_quiz = Quiz(new_quiz_question, new_quiz_options, answer_idx)
+                self.quizzes.append(new_quiz)
+                self.save_state()
+                print("퀴즈가 성공적으로 추가되었습니다!")
+                break
+            else:
+                print("입력이 옳바르지 않습니다 다시 입력해주세요!")
+            
+        
 
     def run(self):
         try:
@@ -118,7 +139,7 @@ class QuizGame:
                     
                     pass
                 elif choice == "2":
-                    #self.add_quiz() / 퀴즈 추가
+                    self.add_quiz() 
                     pass
                 elif choice == "3":
                     self.list_quiz()
@@ -135,12 +156,12 @@ class QuizGame:
 
         except KeyboardInterrupt:
             print("\n\n Ctrl + C 프로그램을 종료합니다")
-            #self.save_data()
-            pass
+            self.save_state()
+            
         except EOFError:
             print("\n\n 에러로 입력이 종료 되었습니다")
-            #self.save_data()
-            pass
+            self.save_state()
+            
 
 
 # 코드 동작 테스트
