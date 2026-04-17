@@ -8,14 +8,19 @@
 
 1. 메뉴
 <img width="295" height="238" alt="menu" src="https://github.com/user-attachments/assets/7dc6661b-c441-4a46-a233-046ed642aa83" />
+
 2. 퀴즈
 <img width="220" height="251" alt="quiz" src="https://github.com/user-attachments/assets/314ded86-ca0a-4564-9459-29a4b7de3a92" />
+
 3. 최고 점수 저장
 <img width="217" height="136" alt="max_score_save" src="https://github.com/user-attachments/assets/c3e12509-e099-49b1-9867-28b170e876a7" />
+
 4. 일반종료
 <img width="292" height="257" alt="init 0" src="https://github.com/user-attachments/assets/ec10b344-3071-47ae-a002-00b6732b9d94" />
+
 5. 예외처리 종료
 <img width="296" height="289" alt="C + c" src="https://github.com/user-attachments/assets/e69a2dac-9b1a-4945-aaae-ff056a0d41ee" />
+
 
 3. 주요 기능
 퀴즈 풀기: 등록된 문제 풀이 및 정답 확인
