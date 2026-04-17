@@ -174,7 +174,7 @@ class QuizGame:
             self.save_state()
             
 
-
+# branch test
 # 코드 동작 테스트
 if __name__ == "__main__":
     game = QuizGame()
