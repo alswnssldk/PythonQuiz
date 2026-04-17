@@ -59,6 +59,7 @@ class QuizGame:
                     "best_score": self.best_score         
                 }
                 json.dump(json_data, f, ensure_ascii=False, indent=4)
+            print("\n저장 완료")
         except Exception as e:
             print(f"save error: {e}")
 
@@ -113,7 +114,7 @@ class QuizGame:
                 print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
         
         if correct_count > self.best_score:
-            print("새로운 최고 점수 달성")
+            print(f"새로운 최고 점수 달성 {correct_count}점!")
             self.best_score = correct_count
             self.save_state()
     
@@ -166,11 +167,13 @@ class QuizGame:
                     print("잘못된 입력입니다. 1-5 사이의 숫자를 입력해주세요")    
 
         except KeyboardInterrupt:
-            print("\n\n Ctrl + C 프로그램을 종료합니다")
+            print("\n\nCtrl + C 프로그램을 종료합니다")
+            print("저장 후 종료 됩니다")
             self.save_state()
-            
+
         except EOFError:
-            print("\n\n 에러로 입력이 종료 되었습니다")
+            print("\n\n에러로 입력이 종료 되었습니다")
+            print("저장 후 종료 됩니다")
             self.save_state()
             
 
