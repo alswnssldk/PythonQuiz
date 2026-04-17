@@ -50,3 +50,7 @@ Class
   - play_quiz
   - add_quiz
   - run
+
+
+5. 실행방법
+python main.py
