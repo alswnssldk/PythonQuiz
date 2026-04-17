@@ -51,6 +51,16 @@ Class
   - add_quiz
   - run
 
+5. 데이터 파일 명세
+파일 경로 ./state.json (루트 폴더)
+주요 역할: 프로그램 종료 후에도 퀴즈 데이터와 플레이어 기록을 보존하는 로컬 DB 역할
+* **데이터 구조 (Schema):**
+  - `best_score` (int): 플레이어의 역대 최고 점수
+  - `quizzes` (list): 퀴즈 데이터 객체 배열
+    - `question` (string): 퀴즈 문제 문구
+    - `options` (list[str]): 4지선다형 선택지 목록
+    - `answer_idx` (int): 0~3 사이의 정답 인덱스 번호
 
-5. 실행방법
+
+6. 실행방법
 python main.py
