@@ -19,7 +19,7 @@ class Quiz:
 
 def create_default_quizzes():
     return [
-        Quiz("~~~~",["-","-","-","-"], 2),
+        Quiz("  ",["-","-","-","-"], 2),
         Quiz("~~~~",["-","-","-","-"], 2),
         Quiz("~~~~",["-","-","-","-"], 2),
         Quiz("~~~~",["-","-","-","-"], 2),
@@ -50,7 +50,7 @@ class QuizGame:
             return default_quizzes, 0
 
 
-    def save_state(self, quizzes=None):
+    def save_state(self):
         try:
             with open(self.file_path, "w", encoding="utf-8") as f:
                 #Quiz객체를 -> dict로 변경
@@ -84,6 +84,12 @@ class QuizGame:
         for i, quiz in enumerate(self.quizzes, start=1):
             print(f"[{i}] {quiz.question}")
         print("-"*40)
+    
+    def max_score(self):
+        if self.best_score == 0:
+            print("아직 퀴즈를 풀지 않았습니다 풀어보세요!")
+        else:
+            print(f"최고 점수는 {self.best_score}점 입니다!")
 
     def play_quiz(self):
         correct_count = 0
@@ -93,7 +99,7 @@ class QuizGame:
                 print(f"[{n}] {option}")
             
             while True:
-                user_answer = input("정답 입력 1-4 : ")
+                user_answer = input("정답 입력 1-4 : ").strip()
 
                 if user_answer.isdigit() and 1 <= int(user_answer) <= 4:
                     user_answer = int(user_answer)
@@ -105,11 +111,16 @@ class QuizGame:
                 correct_count += 1
             else:
                 print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
+        
+        if correct_count > self.best_score:
+            print("새로운 최고 점수 달성")
+            self.best_score = correct_count
+            self.save_state()
     
     def add_quiz(self):
         i = 0
         new_quiz_options = []
-        new_quiz_question = input("문제를 입력해주세요 : ")
+        new_quiz_question = input("문제를 입력해주세요 : ").strip()
     
         for i in range(4):
             new_quiz_options.append(input(f"\n[{i+1}] 번째 보기를 입력해주세요 : "))
@@ -145,7 +156,7 @@ class QuizGame:
                     self.list_quiz()
 
                 elif  choice == "4":
-                    #self.max_score() / 점수 확인
+                    self.max_score()
                     pass
                 elif choice == "5":
                     print("프로그램을 종료합니다. 안녕히 가세요!")
@@ -168,9 +179,3 @@ class QuizGame:
 if __name__ == "__main__":
     game = QuizGame()
     game.run()
-
-# Quiz
-# - Quiz 객체
-# -   
-# QuizMaster
-# QuizGame
