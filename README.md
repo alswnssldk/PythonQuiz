@@ -1,66 +1,72 @@
 # [Python Quiz Game]
 
-1. 프로젝트 개요 및 주제 선정 이유
-
+## 1. 프로젝트 개요 및 주제 선정 이유
 객체 지향 설계를 적용하여 데이터 보존 및 예외 처리가 구현된 퀴즈 게임입니다.
-
 간단한 야구 규칙이나 상식을 퀴즈를 통해 쉽고 재미있게 익히게 하고자 선정했습니다.
+* **기본 퀴즈 제공:** 프로그램 최초 실행 시, 학습을 돕기 위한 **기본 퀴즈가 5개 이상** 포함되어 제공됩니다.
 
 ## 2. 실행 화면 (Screenshots)
+*(기존 스크린샷 유지)*
+- 2-1. 메뉴: <img width="295" height="238" alt="menu" src="https://github.com/user-attachments/assets/7dc6661b-c441-4a46-a233-046ed642aa83" />
+- 2-2. 퀴즈: <img width="220" height="251" alt="quiz" src="https://github.com/user-attachments/assets/314ded86-ca0a-4564-9459-29a4b7de3a92" />
+- 2-3. 최고 점수 저장: <img width="217" height="136" alt="max_score_save" src="https://github.com/user-attachments/assets/c3e12509-e099-49b1-9867-28b170e876a7" />
+- 2-4. 일반종료: <img width="292" height="257" alt="init 0" src="https://github.com/user-attachments/assets/ec10b344-3071-47ae-a002-00b6732b9d94" />
+- 2-5. 예외처리 종료: <img width="296" height="289" alt="C + c" src="https://github.com/user-attachments/assets/e69a2dac-9b1a-4945-aaae-ff056a0d41ee" />
 
-2-1. 메뉴
-<img width="295" height="238" alt="menu" src="https://github.com/user-attachments/assets/7dc6661b-c441-4a46-a233-046ed642aa83" />
+## 3. 주요 기능 및 예외 처리
+- **퀴즈 풀기:** 등록된 문제 풀이 및 정답/오답 판정.
+- **퀴즈 추가:** 새로운 문제/보기/정답 입력 및 즉시 저장.
+- **목록 보기:** 현재 등록된 전체 문제 리스트 확인.
+- **점수 확인:** 역대 최고 정답 개수(Best Score) 출력.
+- **안전 종료:** 5번 선택 혹은 `Ctrl+C` / `EOF` 발생 시 최신 상태 자동 저장.
+- **세부 예외 처리 (입력 검증):** 
+  - 메뉴 및 퀴즈 정답 입력 시 **공백, 문자 입력, 선택지 범위를 벗어난 값, 빈 입력**이 들어올 경우, 프로그램이 종료되지 않고 "잘못된 입력입니다." 등의 경고 문구 출력 후 재입력을 요구하도록 예외 처리(`try-except` 및 조건문)가 구현되어 있습니다.
 
-2-2. 퀴즈
-<img width="220" height="251" alt="quiz" src="https://github.com/user-attachments/assets/314ded86-ca0a-4564-9459-29a4b7de3a92" />
+## 4. 파일 구조 및 객체 지향 설계 (책임 분리)
+본 프로그램은 유지보수성과 확장성을 위해 함수형이 아닌 **객체 지향(OOP)**으로 설계되었습니다. 함수로만 구현할 경우 전역 변수 사용이 늘어나고 상태 관리가 복잡해지지만, 클래스를 사용하면 데이터와 로직을 하나의 객체로 묶어(캡슐화) 안전하게 관리할 수 있기 때문입니다.
 
-2-3. 최고 점수 저장
-<img width="217" height="136" alt="max_score_save" src="https://github.com/user-attachments/assets/c3e12509-e099-49b1-9867-28b170e876a7" />
+* **`Quiz` 클래스 (데이터 모델 역할):**
+  * 개별 퀴즈의 속성(문제, 보기, 정답)을 정의하고 관리합니다.
+  * `to_dict`, `from_dict` 메서드를 통해 JSON 직렬화/역직렬화의 책임만 가집니다.
+* **`QuizGame` 클래스 (컨트롤러 역할):**
+  * 입력 처리, 게임 진행 흐름, 데이터 I/O 등의 전반적인 상태와 비즈니스 로직을 담당합니다.
+  * **로직 분리 기준:** 화면 출력(`Display_menu`, `list_quiz`), 게임 로직(`play_quiz`), 데이터 I/O(`load_state`, `save_state`) 등 각 기능의 성격에 따라 메서드를 분리하여 단일 책임 원칙(SRP)을 지향했습니다.
 
-2-4. 일반종료
-<img width="292" height="257" alt="init 0" src="https://github.com/user-attachments/assets/ec10b344-3071-47ae-a002-00b6732b9d94" />
+## 5. 데이터 파일 명세 및 I/O 흐름
+* **파일 경로:** `./state.json`
+* **JSON 선택 이유:** 파이썬 기본 라이브러리로 쉽게 다룰 수 있으며, 사람이 읽고 쓰기 편한 텍스트 기반 포맷이므로 간단한 로컬 DB 역할로 최적입니다.
+* **데이터 구조 (Schema) 및 설계 이유:**
+  - `best_score` (int): 최고 점수만 독립적으로 관리하기 위해 최상단에 배치했습니다.
+  - `quizzes` (list): 순서가 있는 퀴즈 객체들을 배열 형태로 저장하여 순회 및 확장이 쉽도록 설계했습니다.
+* **읽기/쓰기(I/O) 흐름:**
+  1. **프로그램 시작 시:** `QuizGame` 인스턴스 생성과 함께 `load_state`가 호출되어 `state.json`을 읽고 객체 리스트로 변환합니다.
+  2. **프로그램 실행 중:** 퀴즈가 추가될 때마다 즉시 반영됩니다.
+  3. **프로그램 종료 시:** 일반 종료(메뉴 5번) 또는 강제 종료(`Ctrl+C`) 시 `save_state`가 호출되어 현재 상태를 JSON 파일로 덮어씁니다.
+* **try/except의 필요성 및 손상 시 대응:**
+  - 파일이 존재하지 않거나, 권한이 없거나, JSON 형식이 손상되었을 때 프로그램이 비정상 종료되는 것을 막기 위해 I/O 작업 시 `try-except`는 필수입니다.
+  - **대응 방안:** JSON 파싱 에러(손상) 발생 시, 빈 리스트와 기본 점수(0점)로 초기화하여 게임이 정상적으로 실행되도록 Fallback 처리가 되어 있습니다.
+* **데이터 증가 시의 한계 (1000개 이상):**
+  - JSON은 파일 전체를 메모리에 한 번에 올려야 하므로, 데이터가 수천 개 이상으로 늘어나면 로딩 속도 저하 및 메모리 부족 문제가 발생할 수 있습니다. 이 경우 SQLite 같은 RDBMS 도입이 필요합니다.
 
-2-5. 예외처리 종료
-<img width="296" height="289" alt="C + c" src="https://github.com/user-attachments/assets/e69a2dac-9b1a-4945-aaae-ff056a0d41ee" />
+## 6. 요구사항 변경 시 유지보수 관점 (구조 파악)
+* 만약 채점 방식(예: 문제당 배점 차등화)이나 퀴즈 구조(주관식 추가 등)가 변경된다면 다음을 우선 수정해야 합니다.
+  1. `Quiz` 클래스의 속성 및 `from_dict`, `to_dict` (데이터 모델 변경)
+  2. `QuizGame`의 `play_quiz` 메서드 (채점 비즈니스 로직 변경)
+  - 이처럼 책임을 분리해 두었기 때문에, 다른 UI 출력 메서드나 파일 I/O 로직은 수정할 필요 없이 해당 부분만 수정하면 됩니다.
 
+---
 
+## 7. Git 및 GitHub 활용 내역
 
-3. 주요 기능
-퀴즈 풀기: 등록된 문제 풀이 및 정답 확인
+* **GitHub 저장소 링크:** `[여기에 깃허브 링크 삽입 - 예: https://github.com/my-id/quiz-game]`
+* **커밋 내역:** 10개 이상의 의미 있는 단위 커밋 완료.
+* **커밋 규칙:** `feat`(기능 추가), `fix`(버그 수정), `docs`(문서 작업), `refactor`(코드 구조 개선) 등의 접두사를 사용하여 커밋 단위를 논리적으로 분리했습니다.
+* **브랜치 분리 및 병합:**
+  * **분리 이유:** 메인(main) 브랜치의 안정성을 유지하면서, 새로운 기능(예: 예외처리 추가, 파일 IO 기능 등)을 독립된 환경에서 안전하게 개발하기 위함입니다.
+  * **병합의 의미:** 테스트가 완료된 기능 브랜치의 코드를 최종적으로 메인 브랜치에 합쳐 배포 가능한 완성본으로 만드는 과정입니다.
 
-퀴즈 추가: 새로운 문제/보기/정답 입력 및 즉시 저장
+### 7-1. Git 브랜치 전략 및 병합 기록 (git log)
+`[여기에 터미널에서 git log --oneline --graph 명령어를 친 결과 텍스트나 스크린샷 첨부]`
 
-목록 보기: 현재 등록된 전체 문제 리스트 확인
-
-점수 확인: 역대 최고 정답 개수(Best Score) 출력
-
-안전 종료: 5번 선택 혹은 Ctrl+C 종료 시 최신 상태 자동 저장
-
-4. 파일 구조 및 데이터 설명
-Class
- - Quiz
-  - to_dict
-  - from_dict(@classmethod)
- - QuizGame
-  - load_state
-  - save_state
-  - Display_menu
-  - list_quiz
-  - max_score
-  - play_quiz
-  - add_quiz
-  - run
-
-5. 데이터 파일 명세
-파일 경로 ./state.json (루트 폴더)
-주요 역할: 프로그램 종료 후에도 퀴즈 데이터와 플레이어 기록을 보존하는 로컬 DB 역할
-* **데이터 구조 (Schema):**
-  - `best_score` (int): 플레이어의 역대 최고 점수
-  - `quizzes` (list): 퀴즈 데이터 객체 배열
-    - `question` (string): 퀴즈 문제 문구
-    - `options` (list[str]): 4지선다형 선택지 목록
-    - `answer_idx` (int): 0~3 사이의 정답 인덱스 번호
-
-
-6. 실행방법
-python main.py
+### 7-2. Clone 및 Pull 실습 흔적
+`[여기에 다른 폴더에서 git clone 하거나 변경사항을 git pull 받아오는 터미널 스크린샷 첨부]`
