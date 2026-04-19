@@ -58,7 +58,7 @@
 
 ## 7. Git 및 GitHub 활용 내역
 
-* **GitHub 저장소 링크:** `[여기에 깃허브 링크 삽입 - 예: https://github.com/my-id/quiz-game]`
+* **GitHub 저장소 링크:** 
 * **커밋 내역:** 10개 이상의 의미 있는 단위 커밋 완료.
 * **커밋 규칙:** `feat`(기능 추가), `fix`(버그 수정), `docs`(문서 작업), `refactor`(코드 구조 개선) 등의 접두사를 사용하여 커밋 단위를 논리적으로 분리했습니다.
 * **브랜치 분리 및 병합:**
@@ -66,7 +66,8 @@
   * **병합의 의미:** 테스트가 완료된 기능 브랜치의 코드를 최종적으로 메인 브랜치에 합쳐 배포 가능한 완성본으로 만드는 과정입니다.
 
 ### 7-1. Git 브랜치 전략 및 병합 기록 (git log)
-`[여기에 터미널에서 git log --oneline --graph 명령어를 친 결과 텍스트나 스크린샷 첨부]`
+<img width="459" height="299" alt="git log" src="https://github.com/user-attachments/assets/1df5b5cc-2179-4c5c-b00b-6050fbefa4d1" />
+
 
 ### 7-2. Clone 및 Pull 실습 흔적
-`[여기에 다른 폴더에서 git clone 하거나 변경사항을 git pull 받아오는 터미널 스크린샷 첨부]`
+<img width="614" height="114" alt="clone" src="https://github.com/user-attachments/assets/6d2d190b-cec3-4952-81c6-9c75bc85d7db" />
