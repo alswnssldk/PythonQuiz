@@ -6,7 +6,6 @@
 * **기본 퀴즈 제공:** 프로그램 최초 실행 시, 학습을 돕기 위한 **기본 퀴즈가 5개 이상** 포함되어 제공됩니다.
 
 ## 2. 실행 화면 (Screenshots)
-*(기존 스크린샷 유지)*
 - 2-1. 메뉴: <img width="295" height="238" alt="menu" src="https://github.com/user-attachments/assets/7dc6661b-c441-4a46-a233-046ed642aa83" />
 - 2-2. 퀴즈: <img width="220" height="251" alt="quiz" src="https://github.com/user-attachments/assets/314ded86-ca0a-4564-9459-29a4b7de3a92" />
 - 2-3. 최고 점수 저장: <img width="217" height="136" alt="max_score_save" src="https://github.com/user-attachments/assets/c3e12509-e099-49b1-9867-28b170e876a7" />
