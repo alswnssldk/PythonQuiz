@@ -65,7 +65,7 @@
   * **병합의 의미:** 테스트가 완료된 기능 브랜치의 코드를 최종적으로 메인 브랜치에 합쳐 배포 가능한 완성본으로 만드는 과정입니다.
 
 ### 7-1. Git 브랜치 전략 및 병합 기록 (git log)
-<img width="459" height="299" alt="git log" src="https://github.com/user-attachments/assets/1df5b5cc-2179-4c5c-b00b-6050fbefa4d1" />
+<img width="430" height="481" alt="Screenshot 2026-04-21 at 9 30 05 PM" src="https://github.com/user-attachments/assets/ed562cbc-4049-40ec-b1d5-bef19943d025" />
 
 
 ### 7-2. Clone 및 Pull 실습 흔적
