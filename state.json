@@ -49,6 +49,26 @@
                 "퍽"
             ],
             "answer_idx": 4
+        },
+        {
+            "question": "1",
+            "options": [
+                "",
+                "1",
+                "1",
+                "1"
+            ],
+            "answer_idx": 1
+        },
+        {
+            "question": "njnjnn",
+            "options": [
+                "mjkm",
+                "lp",
+                "o",
+                "kl"
+            ],
+            "answer_idx": 3
         }
     ],
     "best_score": 4
