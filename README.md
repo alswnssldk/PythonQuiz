@@ -56,8 +56,6 @@
 ---
 
 ## 7. Git 및 GitHub 활용 내역
-<img width="559" height="271" alt="Screenshot 2026-04-21 at 9 41 41 PM" src="https://github.com/user-attachments/assets/ba98ddf4-1426-48b0-a484-25d2697b54a1" />
-
 * **GitHub 저장소 링크:** 
 * **커밋 내역:** 10개 이상의 의미 있는 단위 커밋 완료.
 * **커밋 규칙:** `feat`(기능 추가), `fix`(버그 수정), `docs`(문서 작업), `refactor`(코드 구조 개선) 등의 접두사를 사용하여 커밋 단위를 논리적으로 분리했습니다.
@@ -71,3 +69,4 @@
 
 ### 7-2. Clone 및 Pull 실습 흔적
 <img width="614" height="114" alt="clone" src="https://github.com/user-attachments/assets/6d2d190b-cec3-4952-81c6-9c75bc85d7db" />
+<img width="559" height="271" alt="Screenshot 2026-04-21 at 9 41 41 PM" src="https://github.com/user-attachments/assets/ba98ddf4-1426-48b0-a484-25d2697b54a1" />
