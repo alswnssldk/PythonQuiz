@@ -93,7 +93,30 @@ class QuizGame:
             print(f"최고 점수는 {self.best_score}점 입니다!")
 
     def play_quiz(self):
-        pass
+        correct_count = 0
+        for i, quiz in enumerate(self.quizzes, start=1):
+            print(f"\n[{i}번 문제] {quiz.question}\n")
+            for n, option in enumerate(quiz.options, start=1):
+                print(f"[{n}] {option}")
+            
+            while True:
+                user_answer = input("정답 입력 1-4 : ").strip()
+
+                if user_answer.isdigit() and 1 <= int(user_answer) <= 4:
+                    user_answer = int(user_answer)
+                    break
+                else:
+                    print("잘못된 입력입니다. 1부터 4사이의 숫자를 입력하세요.")
+            if user_answer == quiz.answer_idx:
+                print("정답입니다!")
+                correct_count += 1
+            else:
+                print(f"오답입니다! (정답 : {quiz.answer_idx}번)")
+        
+        if correct_count > self.best_score:
+            print(f"새로운 최고 점수 달성 {correct_count}점!")
+            self.best_score = correct_count
+            self.save_state()
     
     def add_quiz(self):
         i = 0
