@@ -56,6 +56,7 @@
 ---
 
 ## 7. Git 및 GitHub 활용 내역
+<img width="559" height="271" alt="Screenshot 2026-04-21 at 9 41 41 PM" src="https://github.com/user-attachments/assets/ba98ddf4-1426-48b0-a484-25d2697b54a1" />
 
 * **GitHub 저장소 링크:** 
 * **커밋 내역:** 10개 이상의 의미 있는 단위 커밋 완료.
